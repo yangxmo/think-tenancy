@@ -10,11 +10,11 @@ declare(strict_types=1);
 
 namespace think\tenancy\services;
 
-use think\tenancy\model\Tenant;
+use think\tenancy\model\Tenants;
 
 class ResetService
 {
-    public static function reset(Tenant $tenant): void
+    public static function reset(Tenants $tenant): void
     {
         // 重新配置数据库连接。
         self::resetDatabase($tenant);

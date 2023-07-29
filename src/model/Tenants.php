@@ -13,10 +13,8 @@ namespace think\tenancy\model;
 use think\Model;
 use think\tenancy\events;
 
-class Tenant extends Model
+class Tenants extends Model
 {
-    protected $table = 'tenants';
-
     protected $autoWriteTimestamp = true;
 
     public static function onAfterInsert(self $model): void

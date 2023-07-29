@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author Abbotton <uctoo@foxmail.com>
  */
 
-use think\tenancy\model\Tenant;
+use think\tenancy\model\Tenants;
 
 return [
     // 主域名配置，所有主域名都不会走多租户逻辑。
@@ -38,7 +38,7 @@ return [
     // 数据填充目录
     'seed_path' => root_path().'database'.DIRECTORY_SEPARATOR.'seeds'.DIRECTORY_SEPARATOR.'tenants',
     // 租户模型
-    'tenant_model' => Tenant::class,
+    'tenant_model' => Tenants::class,
     // 是否重写文件系统配置
     'reset_filesystem' => true,
     // 新的文件系统配置

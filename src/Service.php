@@ -23,7 +23,6 @@ class Service extends BaseService
 
     public function boot(): void
     {
-        var_dump(222222);
         if (! $this->app->runningInConsole()) {
             if (\in_array($this->app->request->host(true), config('tenancy.central_domains'), true)) {
                 return;
@@ -31,7 +30,6 @@ class Service extends BaseService
             $subdomain = $this->app->request->subDomain();
             if ($subdomain) {
                 $tenant = app(\think\tenancy\Tenancy::class)->find($subdomain);
-                var_dump($tenant);
                 $this->validateTenancy($tenant);
                 ResetService::reset($tenant);
             }

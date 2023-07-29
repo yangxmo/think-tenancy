@@ -16,11 +16,11 @@ use think\tenancy\events\EndingTenancy;
 use think\tenancy\events\InitializingTenancy;
 use think\tenancy\events\TenancyEnded;
 use think\tenancy\events\TenancyInitialized;
-use think\tenancy\model\Tenant;
+use think\tenancy\model\Tenants;
 
 class Tenancy
 {
-    /** @var null|Model|Tenant */
+    /** @var null|Model|Tenants */
     public $tenant;
 
     /** @var bool */
@@ -76,7 +76,7 @@ class Tenancy
         return '';
     }
 
-    /** @return Model|Tenant */
+    /** @return Model|Tenants */
     public function model()
     {
         $class = config('tenancy.tenant_model');

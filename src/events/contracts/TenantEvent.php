@@ -10,14 +10,14 @@ declare(strict_types=1);
 
 namespace think\tenancy\events\contracts;
 
-use think\tenancy\model\Tenant;
+use think\tenancy\model\Tenants;
 
 abstract class TenantEvent
 {
-    /** @var Tenant */
+    /** @var Tenants */
     public $tenant;
 
-    public function __construct(Tenant $tenant)
+    public function __construct(Tenants $tenant)
     {
         $this->tenant = $tenant;
     }
