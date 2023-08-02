@@ -59,6 +59,8 @@ EOT
      */
     protected function execute(Input $input, Output $output): void
     {
+        $this->getPath();
+
         $this->path = $input->getArgument('path');
         $version = $input->getOption('target');
         $date = $input->getOption('date');

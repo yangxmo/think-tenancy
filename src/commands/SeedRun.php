@@ -58,6 +58,9 @@ EOT
      */
     protected function execute(Input $input, Output $output): void
     {
+
+        $this->getPath();
+
         event(new SeedingDatabase($this->tenant));
 
         $this->path = $input->getArgument('path');
