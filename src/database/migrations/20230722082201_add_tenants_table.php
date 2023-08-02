@@ -41,13 +41,13 @@ class AddTenantsTable extends Migrator
             ['engine' => 'InnoDB', 'collation' => 'utf8mb4_unicode_ci']
         )->setComment('租户表');
         $table->setPrimaryKey('id');
-        $table->addColumn(Column::string('name'))->setComment('租户名称');
-        $table->addColumn(Column::string('sub_domain', 128))->setComment('子域名');
-        $table->addColumn(Column::integer('expired_at'))->setComment('过期时间');
-        $table->addColumn(Column::string('db_name'))->setComment('租户数据库名称');
-        $table->addColumn(Column::string('db_username'))->setComment('租户数据库用户名');
-        $table->addColumn(Column::string('db_password'))->setComment('租户数据库密码');
-        $table->addColumn(Column::boolean('status'))->setComment('租户状态');
+        $table->addColumn(Column::string('name')->setComment('租户名称'));
+        $table->addColumn(Column::string('sub_domain', 128)->setComment('子域名'));
+        $table->addColumn(Column::integer('expired_at')->setComment('过期时间'));
+        $table->addColumn(Column::string('db_name')->setComment('租户数据库名称'));
+        $table->addColumn(Column::string('db_username')->setComment('租户数据库用户名'));
+        $table->addColumn(Column::string('db_password')->setComment('租户数据库密码'));
+        $table->addColumn(Column::boolean('status')->setComment('租户状态'));
         $table->addIndex('sub_domain');
         $table->addIndex('expired_at');
         $table->addIndex('db_name');
