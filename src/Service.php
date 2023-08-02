@@ -21,6 +21,9 @@ class Service extends BaseService
         $this->app->make(Tenancy::class);
     }
 
+    /**
+     * @throws Exception
+     */
     public function boot(): void
     {
         if (! $this->app->runningInConsole()) {
@@ -28,6 +31,11 @@ class Service extends BaseService
                 return;
             }
             $subdomain = $this->app->request->subDomain();
+
+            if (empty($subdomain)) {
+                $this->validateTenancy($subdomain);
+            }
+
             if ($subdomain) {
                 $tenant = app(\think\tenancy\Tenancy::class)->find($subdomain);
                 $this->validateTenancy($tenant);
