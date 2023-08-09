@@ -25,12 +25,8 @@ class MigrateRun extends BaseRun
 
     private $path = '';
 
-    public function getPath()
+    protected function getPath()
     {
-        $this->tenant = app(\think\tenancy\Tenancy::class)->find($this->input->getOption('tenant'));
-        // TODO 判断租户状态是否正常
-        ResetService::resetDatabase($this->tenant);
-
         return $this->path ?: config('tenancy.migration_path');
     }
 
@@ -57,7 +53,7 @@ EOT
 
     protected function execute(Input $input, Output $output): void
     {
-        $this->getPath();
+        $this->init();
 
         event(new MigratingDatabase($this->tenant));
 
@@ -78,5 +74,12 @@ EOT
         $output->writeln('<comment>All Done. Took '.sprintf('%.4fs', $end - $start).'</comment>');
 
         event(new DatabaseMigrated($this->tenant));
+    }
+
+    protected function init()
+    {
+        $this->tenant = app(\think\tenancy\Tenancy::class)->find($this->input->getOption('tenant'));
+        // TODO 判断租户状态是否正常
+        ResetService::resetDatabase($this->tenant);
     }
 }

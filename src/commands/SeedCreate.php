@@ -15,6 +15,7 @@ use think\console\Input;
 use think\console\input\Argument as InputArgument;
 use think\console\Output;
 use think\migration\command\seed\Create as BaseCreate;
+use think\tenancy\services\ResetService;
 
 class SeedCreate extends BaseCreate
 {

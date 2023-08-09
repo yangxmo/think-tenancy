@@ -19,14 +19,11 @@ use think\tenancy\services\ResetService;
 
 class MigrateRollback extends BaseRollback
 {
+    private $tenant;
     private $path = '';
 
-    public function getPath()
+    protected function getPath()
     {
-        $tenant = app(\think\tenancy\Tenancy::class)->find($this->input->getOption('tenant'));
-        // TODO 判断租户状态是否正常
-        ResetService::resetDatabase($tenant);
-
         return $this->path ?: config('tenancy.migration_path');
     }
 
@@ -59,7 +56,7 @@ EOT
      */
     protected function execute(Input $input, Output $output): void
     {
-        $this->getPath();
+        $this->init();
 
         $this->path = $input->getArgument('path');
         $version = $input->getOption('target');
@@ -77,5 +74,12 @@ EOT
 
         $output->writeln('');
         $output->writeln('<comment>All Done. Took '.sprintf('%.4fs', $end - $start).'</comment>');
+    }
+
+    protected function init()
+    {
+        $this->tenant = app(\think\tenancy\Tenancy::class)->find($this->input->getOption('tenant'));
+        // TODO 判断租户状态是否正常
+        ResetService::resetDatabase($this->tenant);
     }
 }
